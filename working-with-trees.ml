@@ -22,7 +22,7 @@ let max x y = if x < y then y else x
 let rec depth t =
   match t with
   | A -> 0
-  | B(t1,t2) -> 1 + max (depth t1) (depth t2)
+  | B(t1,t2)-> 1 + max (depth t1) (depth t2)
                   
 let rec mirror t = match t with
   |A -> A
@@ -90,3 +90,30 @@ let slini l =
     | _ -> ""
   in let a = slini' l
   in "[" ^ a ^ "]"
+  
+let cstyle t =
+  let rec cstyle' t =
+    match t with
+    | A -> "A"
+    | B(t1,t2) -> "B(" ^ cstyle' t1 ^ "," ^ cstyle' t2 ^ ")"
+  in let str = cstyle' t in
+  "(" ^ str ^ ")"
+  
+let rec pre t =
+  match t with
+  | A -> "A"
+  | B(t1,t2) -> "B" ^ pre t1 ^ pre t2
+                  
+let rec post t = 
+  match t with
+  | A -> "A"
+  | B(t1,t2) -> post t1 ^ post t2 ^ "B"
+                
+let rec inf t =
+  let ptree t = match t with
+    | A -> "A"
+    | t -> "(" ^ inf t ^ ")"
+  in match t with
+  | A -> "A"
+  | B(t1,t2) -> inf t1 ^ "B" ^ ptree t2
+                  
