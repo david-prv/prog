@@ -1,2 +1,3 @@
 # ocaml-lists
-Working with lists in OCaml
+Working with OCaml
+This repository was made during lectures
