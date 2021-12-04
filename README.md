@@ -11,4 +11,4 @@ This repository was made during lectures
 - Programming Systems Lab - University of Saarland ([Git](https://github.com/uds-psl))
 - Wikipedia ([article](https://de.wikipedia.org/wiki/Objective_CAML))
 - OCaml Manual ([web](https://ocaml.org/releases/4.13/htmlman/index.html))
-- SML Alice ([manual](https://www.ps.uni-saarland.de/alice/))
+- SML Alice ([manual](https://www.ps.uni-saarland.de/alice/manual/))
