@@ -57,4 +57,5 @@ let next_prime x = first prime_test (x+1)
 let nth_prime n = iter next_prime n 2
 let nth_prime_sqr n = let a = (iter next_prime n 2) in a*a
                                                        
+(* iterating on booleans *)
 let even n = iter (fun a -> not a) n true 
