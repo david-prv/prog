@@ -148,3 +148,32 @@ let rec inf_f_abc t =
   | A -> "A"
   | B(t1,t2) -> "(" ^ inf_f_abc t1 ^ "B" ^ ptree t2 ^ ")"  
   | C(t1,t2) -> "(" ^ inf_f_abc t1 ^ "C" ^ ptree t2 ^ ")"  
+                
+(* B takes its arguments before C and both B and C are right-associative *)                
+
+let rec ctreeii t = match t with
+  |C(t1,t2)-> btree t1 ^"C" ^ ctreeii t2
+  |t-> btree t
+and btree t = match t with
+  |B(t1,t2)-> btree t1 ^ "B" ^ ptree t2
+  |t->ptree t
+and ptree t = match t with
+  |A-> "A"
+  |t-> "(" ^ctreeii t ^")"
+       
+(* Abstract expressions *)
+
+type var = string
+type con = Bcon of bool | Icon of int
+type op  = Add | Sub | Mul | Leq
+type exp = Var of var | Con of con
+         | Oapp of op * exp * exp
+         | Fapp of exp * exp
+         | If of exp * exp * exp
+         | Lam of var * exp
+         | Let of var * exp * exp
+         | Letrec of var * var * exp * exp 
+                     
+let expFact = Letrec("fact", "x", If(Oapp(Leq, Var "x", Con (Icon 1)), Con (Icon 1), Oapp(Mul, Var "x", Fapp(Var "fact", Oapp(Sub, Var "x", Con (Icon 1))))), Fapp(Var "fact", Con (Icon 10)))
+
+                
