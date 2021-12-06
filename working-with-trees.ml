@@ -1,5 +1,6 @@
 type tree = A | B of tree * tree
 
+
 (* Example declaration of trees *)                     
 let t = B(B(A,A), B(B(A,A),A)) 
     
@@ -102,20 +103,12 @@ let cstyle t =
 let rec pre t =
   match t with
   | A -> "A"
-  | B(t1,t2) -> "B" ^ pre t1 ^ pre t2
+  | B(t1,t2) -> "B" ^ pre t1 ^ pre t2 
                   
 let rec post t = 
   match t with
   | A -> "A"
-  | B(t1,t2) -> post t1 ^ post t2 ^ "B"
-               
-let rec inf_f t =
-  let ptree t = match t with
-    | A -> "A"
-    | t -> "(" ^ inf_f t ^ ")"
-  in match t with
-  | A -> "A"
-  | B(t1,t2) -> "(" ^ inf_f t1 ^ "B" ^ ptree t2 ^ ")"             
+  | B(t1,t2) -> post t1 ^ post t2 ^ "B" 
  
 let rec inf t =
   let ptree t = match t with
@@ -125,3 +118,33 @@ let rec inf t =
   | A -> "A"
   | B(t1,t2) -> inf t1 ^ "B" ^ ptree t2
                   
+let rec inf_f t =
+  let ptree t = match t with
+    | A -> "A"
+    | t -> "(" ^ inf_f t ^ ")"
+  in match t with
+  | A -> "A"
+  | B(t1,t2) -> "(" ^ inf_f t1 ^ "B" ^ ptree t2 ^ ")"  
+                  
+type ctree = A | B of ctree * ctree | C of ctree * ctree                  
+        
+let rec pre_abc t =
+  match t with
+  | A -> "A" 
+  | B(t1,t2) -> "B" ^ pre_abc t1 ^ pre_abc t2
+  | C(t1,t2) -> "C" ^ pre_abc t1 ^ pre_abc t2
+                  
+let rec post_abc t = 
+  match t with
+  | A -> "A"
+  | B(t1,t2) -> post_abc t1 ^ post_abc t2 ^ "B"
+  | C(t1,t2) -> post_abc t1 ^ post_abc t2 ^ "C"
+                
+let rec inf_f_abc t =
+  let ptree t = match t with
+    | A -> "A"
+    | t -> "(" ^ inf_f_abc t ^ ")"
+  in match t with
+  | A -> "A"
+  | B(t1,t2) -> "(" ^ inf_f_abc t1 ^ "B" ^ ptree t2 ^ ")"  
+  | C(t1,t2) -> "(" ^ inf_f_abc t1 ^ "C" ^ ptree t2 ^ ")"  
