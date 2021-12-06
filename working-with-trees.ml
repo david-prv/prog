@@ -108,7 +108,15 @@ let rec post t =
   match t with
   | A -> "A"
   | B(t1,t2) -> post t1 ^ post t2 ^ "B"
-                
+               
+let rec inf_f t =
+  let ptree t = match t with
+    | A -> "A"
+    | t -> "(" ^ inf_f t ^ ")"
+  in match t with
+  | A -> "A"
+  | B(t1,t2) -> "(" ^ inf_f t1 ^ "B" ^ ptree t2 ^ ")"             
+ 
 let rec inf t =
   let ptree t = match t with
     | A -> "A"
