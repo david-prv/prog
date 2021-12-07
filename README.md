@@ -1,4 +1,4 @@
-# ocaml
+# OCaml Lecture Notes
 
 Working with OCaml  
 This repository was made during lectures
