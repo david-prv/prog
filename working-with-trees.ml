@@ -197,8 +197,35 @@ let rec algo_read env exp =
   | If(ex1,ex2,ex3) -> (algo_read env ex1) && (algo_read env ex2) && (algo_read env ex3)
   | Lam(var,ex) -> algo_read (env @ [var]) ex
   | Let(var,ex1,ex2) -> (algo_read env ex1) && (algo_read (env @ [var]) ex2)
-  | Letrec(var1,var2,ex1,ex2) -> (algo_read ((env @ [var1]) @ [var2]) ex1) &&  (algo_read (env @ [var1]) ex2)
-                                                                               
+  | Letrec(var1,var2,ex1,ex2) -> (algo_read ((env @ [var1]) @ [var2]) ex1) && (algo_read (env @ [var1]) ex2)
+                                           
+(* Check for closeness in expressions *)
+
+let is_exp_closed exp =
+  match (algo_read [] exp) with
+  | true -> true
+  | _ -> false
+    
+(* Return free variables of expression *)
+
+let free_vars exp =
+  let akku = [] in
+  let free_vars' env exp =
+    let rec free x = match akku @ [x] with
+      | _ -> false
+    in match exp with
+    | Con(con) -> true
+    | Var(var) -> if mem var env then true else free var
+    | Oapp(op,ex1,ex2) -> (algo_read env ex1) && (algo_read env ex2)
+    | Fapp(ex1,ex2) -> (algo_read env ex1) && (algo_read env ex2)
+    | If(ex1,ex2,ex3) -> (algo_read env ex1) && (algo_read env ex2) && (algo_read env ex3)
+    | Lam(var,ex) -> algo_read (env @ [var]) ex
+    | Let(var,ex1,ex2) -> (algo_read env ex1) && (algo_read (env @ [var]) ex2)
+    | Letrec(var1,var2,ex1,ex2) -> (algo_read ((env @ [var1]) @ [var2]) ex1) && (algo_read (env @ [var1]) ex2)
+  in let _ = free_vars' [] exp
+  in akku
+                                                                              
+  
 (* Linearization of abstract expressions *)
 
 let rec exp_lin exp =
@@ -219,3 +246,5 @@ let rec exp_lin exp =
   | Con(con) -> match con with
     | Icon(int) -> digit2string int
     | Bcon(bool) -> bool2string bool 
+
+                      
