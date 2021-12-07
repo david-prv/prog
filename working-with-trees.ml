@@ -67,6 +67,11 @@ let digit2string d =
   | 3 -> "3" | 6 -> "6" | 9 -> "9"
   | 0 -> "0" | _ -> ""
            
+let bool2string b =
+  match b with
+  | true -> "true"
+  | false -> "false"
+
 let prefix n =
   if n < 0 then
     "-"
@@ -149,17 +154,17 @@ let rec inf_f_abc t =
   | B(t1,t2) -> "(" ^ inf_f_abc t1 ^ "B" ^ ptree t2 ^ ")"  
   | C(t1,t2) -> "(" ^ inf_f_abc t1 ^ "C" ^ ptree t2 ^ ")"  
                 
-(* B takes its arguments before C and both B and C are right-associative *)                
+(* B takes its arguments before C, B right-ass. and C left-ass. *)                
 
-let rec ctreeii t = match t with
-  |C(t1,t2)-> btree t1 ^"C" ^ ctreeii t2
+let rec ctreerl t = match t with
+  |C(t1, t2)-> ctreerl t1 ^"C" ^btree t2
   |t-> btree t
 and btree t = match t with
-  |B(t1,t2)-> btree t1 ^ "B" ^ ptree t2
+  |B(t1,t2)-> ptree t1 ^"B"^btree t2
   |t->ptree t
 and ptree t = match t with
   |A-> "A"
-  |t-> "(" ^ctreeii t ^")"
+  |t-> "(" ^ctreerl t^")"
        
 (* Abstract expressions *)
 
@@ -176,7 +181,7 @@ type exp = Var of var | Con of con
                      
 let expFact = Letrec("fact", "x", If(Oapp(Leq, Var "x", Con (Icon 1)), Con (Icon 1), Oapp(Mul, Var "x", Fapp(Var "fact", Oapp(Sub, Var "x", Con (Icon 1))))), Fapp(Var "fact", Con (Icon 10)))
 
-(* Algorithmic reading *)
+(* Algorithmic reading of abstract expressions *)
 
 let rec mem x l =
   match l with
@@ -193,3 +198,24 @@ let rec algo_read env exp =
   | Lam(var,ex) -> algo_read (env @ [var]) ex
   | Let(var,ex1,ex2) -> (algo_read env ex1) && (algo_read (env @ [var]) ex2)
   | Letrec(var1,var2,ex1,ex2) -> (algo_read ((env @ [var1]) @ [var2]) ex1) &&  (algo_read (env @ [var1]) ex2)
+                                                                               
+(* Linearization of abstract expressions *)
+
+let rec exp_lin exp =
+  match exp with 
+  | Var(var) -> var
+  | Oapp(op,ex1,ex2) -> begin
+      match op with
+      | Add -> exp_lin ex1 ^ " + " ^ exp_lin ex2
+      | Sub -> exp_lin ex1 ^ " - " ^ exp_lin ex2
+      | Mul -> exp_lin ex1 ^ " * " ^ exp_lin ex2
+      | Leq -> exp_lin ex1 ^ " <= " ^ exp_lin ex2
+    end
+  | Fapp(ex1,ex2) -> exp_lin ex1 ^ " " ^ exp_lin ex2
+  | If(ex1,ex2,ex3) -> "if " ^ exp_lin ex1 ^ " then " ^ exp_lin ex2 ^ " else " ^ exp_lin ex3
+  | Lam(var,ex) -> "fun " ^ var ^ " -> " ^ exp_lin ex
+  | Let(var,ex1,ex2) -> "let " ^ var ^ " = " ^ exp_lin ex1 ^ " in " ^ exp_lin ex2
+  | Letrec(var1,var2,ex1,ex2) -> "let rec " ^ var1 ^ " " ^ var2 ^ " = " ^ exp_lin ex1 ^ " in " ^ exp_lin ex2
+  | Con(con) -> match con with
+    | Icon(int) -> digit2string int
+    | Bcon(bool) -> bool2string bool 
