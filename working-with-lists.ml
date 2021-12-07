@@ -345,7 +345,38 @@ let rec prime_fac x =
     if k = x then [x]
     else k :: prime_fac (x / k)
 
+(* Sample Solution for some list operations, written by Gert Smolka *)
+
 let rec prime_fac' k x =
   if k * k > x then [x]
   else if x mod k = 0 then k :: prime_fac' k (x / k)
   else prime_fac' (k + 1) x
+
+let rec pow l =
+  match l with
+  | [] -> [[]]
+  | x :: l -> let l' = pow l in l' @ map ( cons x ) l'
+
+let rec prefixes l =
+  match l with
+  | [] -> [[]]
+  | x :: l -> [] :: map ( cons x ) ( prefixes l )
+
+let rec suffixes l =
+  match l with
+  | [] -> [[]]
+  | x :: l2 -> l :: suffixes l2
+
+let segments l = flatten ( map prefixes ( suffixes l ) )
+
+let rec splits l =
+match l with
+  | [] -> [([] ,[]) ]
+  | x :: l -> ([], x :: l ) :: map ( fun ( l1, l2 ) -> ( x :: l1, l2 ) ) ( splits l )
+
+let rec gpow n l =
+if n = 0 then
+  [[]]
+else match l with
+  | [] -> []
+  | x :: l -> ( map ( cons x ) ( gpow (n-1) l ) ) @ ( gpow n l )
