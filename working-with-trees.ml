@@ -176,4 +176,20 @@ type exp = Var of var | Con of con
                      
 let expFact = Letrec("fact", "x", If(Oapp(Leq, Var "x", Con (Icon 1)), Con (Icon 1), Oapp(Mul, Var "x", Fapp(Var "fact", Oapp(Sub, Var "x", Con (Icon 1))))), Fapp(Var "fact", Con (Icon 10)))
 
-                
+(* Algorithmic reading *)
+
+let rec mem x l =
+  match l with
+  | [] -> false
+  | y :: l -> (x = y) || mem x l
+
+let rec algo_read env exp =
+  match exp with
+  | Con(con) -> true
+  | Var(var) -> mem var env
+  | Oapp(op,ex1,ex2) -> (algo_read env ex1) && (algo_read env ex2)
+  | Fapp(ex1,ex2) -> (algo_read env ex1) && (algo_read env ex2)
+  | If(ex1,ex2,ex3) -> (algo_read env ex1) && (algo_read env ex2) && (algo_read env ex3)
+  | Lam(var,ex) -> algo_read (env @ [var]) ex
+  | Let(var,ex1,ex2) -> (algo_read env ex1) && (algo_read (env @ [var]) ex2)
+  | Letrec(var1,var2,ex1,ex2) -> (algo_read ((env @ [var1]) @ [var2]) ex1) &&  (algo_read (env @ [var1]) ex2)
