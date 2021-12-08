@@ -231,13 +231,7 @@ let free_vars exp =
 let rec exp_lin exp =
   match exp with 
   | Var(var) -> var
-  | Oapp(op,ex1,ex2) -> begin
-      match op with (* TODO: Parenthesize Operations *)
-      | Add -> exp_lin ex1 ^ " + " ^ exp_lin ex2
-      | Sub -> exp_lin ex1 ^ " - " ^ exp_lin ex2
-      | Mul -> exp_lin ex1 ^ " * " ^ exp_lin ex2
-      | Leq -> exp_lin ex1 ^ " <= " ^ exp_lin ex2
-    end
+  | Oapp(op,ex1,ex2) -> cexp exp
   | Fapp(ex1,ex2) -> exp_lin ex1 ^ " " ^ exp_lin ex2
   | If(ex1,ex2,ex3) -> "if " ^ exp_lin ex1 ^ " then " ^ exp_lin ex2 ^ " else " ^ exp_lin ex3
   | Lam(var,ex) -> "fun " ^ var ^ " -> " ^ exp_lin ex
@@ -246,5 +240,26 @@ let rec exp_lin exp =
   | Con(con) -> match con with
     | Icon(int) -> digit2string int
     | Bcon(bool) -> bool2string bool 
-
+and cexp exp =
+  match exp with
+  | Oapp(Leq,ex1,ex2) -> sexp ex1 ^ " <= " ^ sexp ex2
+  | _ -> sexp exp
+and sexp exp =
+  match exp with
+  | Oapp(Add,ex1,ex2) -> sexp ex1 ^ " + " ^ sexp ex2
+  | Oapp(Sub,ex1,ex2) -> sexp ex1 ^ " - " ^ sexp ex2
+  | _ -> mexp exp
+and mexp exp =
+  match exp with
+  | Oapp(Mul,ex1,ex2) -> mexp ex1 ^ " * " ^ aexp ex2
+  | _ -> aexp exp
+and aexp exp =
+  match exp with
+  | Fapp(ex1,ex2) -> (aexp ex1) ^ " " ^ (pexp ex2)
+  | _ -> pexp exp
+and pexp exp =
+  match exp with
+  | Var(var) -> var
+  | Con(con) -> begin match con with | Bcon(bool) -> bool2string bool | Icon(int) -> digit2string int end
+  | exp -> "(" ^ exp_lin exp ^ ")"
                       
