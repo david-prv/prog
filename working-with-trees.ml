@@ -153,9 +153,44 @@ let rec inf_f_abc t =
   | A -> "A"
   | B(t1,t2) -> "(" ^ inf_f_abc t1 ^ "B" ^ ptree t2 ^ ")"  
   | C(t1,t2) -> "(" ^ inf_f_abc t1 ^ "C" ^ ptree t2 ^ ")"  
-                
-(* B takes its arguments before C, B right-ass. and C left-ass. *)                
-
+        
+(****************************)
+(* brainstorming, not my work *)
+        
+(*C left, B left*)
+let rec ctree t = match t with
+  |C(t1, t2)-> ctree t1 ^"C" ^btree t2
+  |t-> btree t
+and btree t = match t with
+  |B(t1,t2)-> btree t1 ^"B"^ptree t2
+  |t->ptree t
+and ptree t = match t with
+  |A-> "A"
+  |t-> "(" ^ctree t^")"
+        
+(*B right, C right*)
+let rec ctreei t = match t with
+  |C(t1,t2)-> btree t1 ^"C" ^ ctreei t2
+  |t-> btree t
+and btree t = match t with
+  |B(t1,t2)-> ptree t1 ^ "B" ^ btree t2
+  |t->ptree t
+and ptree t = match t with
+  |A-> "A"
+  |t-> "(" ^ctreei t ^")"
+       
+(*B left, C right*)
+let rec ctreeii t= match t with 
+  |C(t1,t2)-> btree t1 ^"C" ^ ctreeii t2
+  |t-> btree t
+and btree t = match t with
+  |B(t1,t2)-> btree t1 ^ "B" ^ ptree t2
+  |t->ptree t
+and ptree t = match t with
+  |A-> "A"
+  |t-> "(" ^ctreeii t ^")"   
+       
+(*B right, C left*)
 let rec ctreerl t = match t with
   |C(t1, t2)-> ctreerl t1 ^"C" ^btree t2
   |t-> btree t
@@ -165,6 +200,8 @@ and btree t = match t with
 and ptree t = match t with
   |A-> "A"
   |t-> "(" ^ctreerl t^")"
+  
+(****************************)
        
 (* Abstract expressions *)
 
