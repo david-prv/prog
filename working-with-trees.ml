@@ -232,7 +232,7 @@ let rec exp_lin exp =
   match exp with 
   | Var(var) -> var
   | Oapp(op,ex1,ex2) -> begin
-      match op with
+      match op with (* TODO: Parenthesize Operations *)
       | Add -> exp_lin ex1 ^ " + " ^ exp_lin ex2
       | Sub -> exp_lin ex1 ^ " - " ^ exp_lin ex2
       | Mul -> exp_lin ex1 ^ " * " ^ exp_lin ex2
