@@ -9,7 +9,8 @@ This repository was made during lectures
 4. [Working with parsers](https://github.com/david-prv/ocaml/blob/main/working-with-parsers.ml): Lexing, Parsing, Associativity, Precedences, Linearizations ...
 
 ## Mini OCaml
-[check it out](github.com/david-prv/mini-ocaml-interpreter)
+Interpreter, Parser and Lexer for OCaml Sublanguage "Mini OCaml"  
+[check it out](https://github.com/david-prv/mini-ocaml-interpreter)
 
 ## Further reading about OCaml
 - Programming Systems Lab - University of Saarland ([Git](https://github.com/uds-psl))
