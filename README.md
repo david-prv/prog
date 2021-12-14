@@ -8,6 +8,9 @@ This repository was made during lectures
 3. [Working with trees](https://github.com/david-prv/ocaml/blob/main/working-with-trees.ml): implementation of data type ``tree``, depth, breadth, tree generation, balanced trees, traversal types (infix, postfix, prefix), abstract expressions (grammar), algorithmic checking for free variables in abstract expressions...
 4. [Working with parsers](https://github.com/david-prv/ocaml/blob/main/working-with-parsers.ml): Lexing, Parsing, Associativity, Precedences, Linearizations ...
 
+## Mini OCaml
+[check it out](github.com/david-prv/mini-ocaml-interpreter)
+
 ## Further reading about OCaml
 - Programming Systems Lab - University of Saarland ([Git](https://github.com/uds-psl))
 - Wikipedia ([article](https://de.wikipedia.org/wiki/Objective_CAML))
