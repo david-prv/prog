@@ -15,7 +15,7 @@ let is_palindrom s =
   let list2 = List.rev list1 in
   list1 = list2 ;;
   
-(* Recursive *)  
+(* Init: Recursive *)  
 let init f x =
   let rec init' f x a =
     if x = 0 then
@@ -24,7 +24,7 @@ let init f x =
       [f a] @ (init' f (x-1) (a+1))
   in init' f x 0 ;;
   
-(* Tail Recursive *)
+(* Init: Tail Recursive *)
 let init_t f n =
   let rec init' f n a =
     if n < 1 then
@@ -75,6 +75,7 @@ let rec inf t =
            
 implode ['\240'; '\159'; '\152'; '\138'] 
 
+(* Lexer: Throws Exception for illegal chars *)
 let lex s =
   let n = String.length s in
   let rec lex i l =
@@ -89,6 +90,7 @@ let lex s =
       | _ -> failwith "lex: illegal character"
   in lex 0 [] ;; 
 
+(* Lexer: Ignores illegal chars *)
 let lex' s =
   let n = String.length s in
   let rec lex' i l =
@@ -102,7 +104,7 @@ let lex' s =
       | ' ' | '\n' | '\t' | _ -> lex' (i+1) l 
   in lex' 0 [] ;; 
   
-(* Skips comments too *)
+(* Lexer: Skips comments too *)
 let lex_ s = 
   let l = explode s in
   let rec skip l =
@@ -140,7 +142,7 @@ let lex_ s =
       | ' ' | '\n' | '\t' | _ -> lex_rec t akku   
   in List.rev (lex_rec l [])
 
-(* Recursive *)  
+(* Count: Recursive *)  
 let count c s = 
   let len = String.length s in 
   let rec count' i =
@@ -150,8 +152,8 @@ let count c s =
       else count' (i+1)
   in count' 0 ;;    
 
-(* Tail Recursive *)
-let count' c s = 
+(* Count: Tail Recursive *)
+let count_t c s = 
   let n= String.length s in 
   let rec count' i c a= 
     if i>= n then a
