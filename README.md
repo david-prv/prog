@@ -10,7 +10,7 @@ This repository was made during lectures
 
 ## Mini OCaml
 Interpreter, Parser and Lexer for OCaml Sublanguage "Mini OCaml"  
-[check it out](https://github.com/david-prv/mini-ocaml-interpreter)
+[check it out](https://github.com/david-prv/mini-ocaml)
 
 ## Further reading about OCaml
 - Programming Systems Lab - University of Saarland ([Git](https://github.com/uds-psl))
