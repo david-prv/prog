@@ -216,7 +216,7 @@ let count' c s =
   in
   count' 0 c 0 ;; 
        
-(*  *)           
+(* Parser for ABC Trees: stack-based *)           
 let rec depost l1 l2 = match l1, l2 with
   | [], l2 -> l2
   | AT::l1, l2 -> depost l1 (A::l2)
