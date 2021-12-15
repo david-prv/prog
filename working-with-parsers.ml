@@ -225,3 +225,53 @@ let rec depost l1 l2 = match l1, l2 with
   | _, _ -> []
 
 let test = depost (lex "AABABAABBAC") [] 
+
+type token = T | F | And | Or | Not   
+type bexp = B of bool
+          | AND of bexp * bexp
+          | OR of bexp * bexp
+          | NOT of bexp ;;
+
+let explode s =
+  let rec explode' s i a =
+    if i = String.length s then a
+    else explode' s (i+1) (a @ [String.get s i])
+  in explode' s 0 [] ;;
+
+(* Bool Expressions *)
+let lexer s =
+  let rec lexer' l = match l with
+    | ' ':: l -> lexer' l
+    | [] -> []
+    | 't' :: 'r' :: 'u' :: 'e' :: l -> T :: lexer' l
+    | 'f' :: 'a' :: 'l' :: 's' :: 'e' :: l -> F :: lexer' l
+    | 'a' :: 'n' :: 'd' :: l -> And :: lexer' l
+    | 'o' :: 'r' :: l -> Or :: lexer' l 
+    | 'n' :: 'o' :: 't' :: l -> Not :: lexer' l 
+    | _ -> failwith " illegal character "
+  in lexer' ( explode s ) 
+
+(* Operators are all left-ass *)
+let rec andexp l = let (t,l) = orexp l
+  in andexp' t l
+and andexp' t l = begin
+  match l with
+  |And::l ->
+      let (t2,l) = orexp l in andexp' (AND(t,t2)) l
+  | _ -> (t, l)
+end
+and orexp l = let (t,l) = boolexp l
+  in orexp' t l
+and orexp' t l = begin
+  match l with
+  |Or::l ->
+      let (t2,l) = boolexp l in orexp' (OR(t,t2)) l
+  | _ -> (t, l)
+end
+and boolexp l = begin
+  match l with
+  | T::l -> (B(true),l)
+  | F::l -> (B(false), l)
+  | Not::l -> let (t,l) = boolexp l in (NOT(t), l)
+  | _ -> failwith "boolexp"
+end
