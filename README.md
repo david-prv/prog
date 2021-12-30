@@ -17,4 +17,4 @@ Interpreter, Parser and Lexer for OCaml Sublanguage "Mini OCaml"
 - Wikipedia ([article](https://de.wikipedia.org/wiki/Objective_CAML))
 - OCaml Manual ([web](https://ocaml.org/releases/4.13/htmlman/index.html))
 - SML Alice ([manual](https://www.ps.uni-saarland.de/alice/manual/))
-- Mini-Ocaml Interpreter ([GitHub Repo](https://github.com/david-prv/mini-ocaml)]
+- Mini-Ocaml Interpreter ([GitHub Repo](https://github.com/david-prv/mini-ocaml))
