@@ -1,9 +1,3 @@
-let a = Array.make 3 1 ;;
-let b = a.(1) <- 2 ;;
-
-(* Sequences *)
-let newArr = Array.make 3 1 in newArr.(1) <- 2; newArr.(2) <- 3; newArr ;;
-
 let rec swap a i j= 
   let x= a.(i) in
   a.(i)<-a.(j);a.(j)<-x                                 
@@ -18,3 +12,16 @@ let ssort1 a : unit =
        if i >= r then ()
        else (swap a (min i i) i; loop (i+1))
   in loop 0
+    
+let reverse a : unit =
+  let rec loop i j =
+    if i > j then ()
+    else (swap a i j; loop (i+1) (j-1))
+  in loop 0 (Array.length a - 1)
+
+let test = invalid_arg "1" + invalid_arg "2";;
+let test = (invalid_arg "1", invalid_arg "2");;
+let test = (invalid_arg "1"; invalid_arg "2");;
+    
+(failwith "1" * failwith "2") + failwith "3";;
+failwith "1" * (failwith "2" + failwith "3");;
