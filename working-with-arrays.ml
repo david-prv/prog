@@ -35,7 +35,7 @@ let sorted a : bool =
   let r = Array.length a - 1 in
   let rec loop i : bool =
     if r <= i then true
-    else if a.(i) <= a.(i+1) then loop (i+2) else false 
+    else if a.(i) <= a.(i+1) then loop (i+1) else false 
   in loop 0
 ;;
 
