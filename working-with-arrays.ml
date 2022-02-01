@@ -8,18 +8,30 @@ let comp x y : comparison =
 let rec swap a i j= 
   let x= a.(i) in
   a.(i)<-a.(j);a.(j)<-x                                 
-;;
+;; 
 
 let ssort a : unit =
   let r = Array.length a - 1 in
   let rec min k j : int =
-    if k >= r then j
+    if k >= r then j (* j saves the current smallest element index, k is running var *)
     else if a.(k+1) < a.(j) then min (k+1) (k+1)
     else min (k+1) j
   in let rec loop i : unit =
        if i >= r then ()
        else (swap a (min i i) i; loop (i+1))
   in loop 0
+;; 
+
+let ssortMax a : unit =
+  let r = Array.length a - 1 in
+  let rec max k j : int =
+    if k < 1 then if a.(k) > a.(j) then k else j
+    else if a.(k-1) > a.(j) then max (k-1) (k-1)
+    else max (k-1) j
+  in let rec loop i : unit =
+       if i < 0 then ()
+       else (swap a (max i i) i; loop (i-1))
+  in loop r
 ;; 
 
 let fst (x,y) = x ;;
