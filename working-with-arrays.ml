@@ -1,3 +1,10 @@
+type comparison = LE | EQ | GR
+
+let comp x y : comparison =
+  if x < y then LE
+  else if x = y then EQ else GR                  
+;; 
+
 let rec swap a i j= 
   let x= a.(i) in
   a.(i)<-a.(j);a.(j)<-x                                 
@@ -58,10 +65,37 @@ let clamp a : unit =
   in loop 0
 ;;
 
+let bsearch a x : int option =
+  let arr = if sorted a then a else (ssort a; a) in
+  let rec loop l r =
+    if l > r then None
+    else let m = (l+r)/2 in
+      match comp x arr.(m) with
+      | LE -> print_string "LE -> "; loop l (m-1)
+      | EQ -> print_string "EQ"; Some m
+      | GR -> print_string "GR -> "; loop (m+1) r
+  in loop 0 (Array.length arr - 1)
+;;
+
+let bsearchF f x n : int option =
+  let arr = init (n + 1) f in 
+  let rec loop l r =
+    if l > r then None
+    else let m = (l+r)/2 in
+      match comp x arr.(m) with
+      | LE -> print_string "LE -> "; loop l (m-1)
+      | EQ -> print_string "EQ"; Some m
+      | GR -> print_string "GR -> "; loop (m+1) r
+  in loop 0 (Array.length arr - 1)
+;;
+
+let f = (fun k -> k*k) ;;
+bsearchF f 9 3;;
+
 (*
-  invalid_arg "1" + invalid_arg "2";;
-  (invalid_arg "1", invalid_arg "2");;
-  (invalid_arg "1"; invalid_arg "2");;
-  (failwith "1" * failwith "2") + failwith "3";;
-  failwith "1" * (failwith "2" + failwith "3");;
+invalid_arg "1" + invalid_arg "2";;
+(invalid_arg "1", invalid_arg "2");;
+(invalid_arg "1"; invalid_arg "2");;
+(failwith "1" * failwith "2") + failwith "3";;
+failwith "1" * (failwith "2" + failwith "3");;
 *)
