@@ -22,6 +22,7 @@ let ssort a : unit =
   in loop 0
 ;; 
 
+(* iterating on k-1 *)
 let ssortMax a : unit =
   let r = Array.length a - 1 in
   let rec max k j : int =
@@ -33,6 +34,20 @@ let ssortMax a : unit =
        else (swap a (max i i) i; loop (i-1))
   in loop r
 ;; 
+
+(* analogue to ssort *)
+let ssortMax' a=
+  let r= Array.length a -1 in 
+  let rec max k j= 
+    if k<0 then j else
+    if a.(k)>a.(j) then max (k-1) (k) else
+      max(k-1) j 
+  in
+  let rec loop i =
+    if i<0 then ()
+    else (swap a (max i i) i ;loop (i-1)) in
+  loop r
+;;
 
 let fst (x,y) = x ;;
 
