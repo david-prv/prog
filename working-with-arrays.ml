@@ -119,6 +119,8 @@ let bsearchF f x n : int option =
 let f = (fun k -> k*k) ;;
 bsearchF f 9 3;; 
 
+middle a.(0) a.((Array.length a) / 2) a.(Array.length a - 1) 
+  
 (* divide and conquer *)
 let qsort a =
   let partition l r =
