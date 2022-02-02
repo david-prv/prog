@@ -117,12 +117,72 @@ let bsearchF f x n : int option =
 ;;
 
 let f = (fun k -> k*k) ;;
-bsearchF f 9 3;;
+bsearchF f 9 3;; 
+
+(* divide and conquer *)
+let qsort a =
+  let partition l r =
+    let x = a.(r) in (* x = pivot *)
+    let rec loop i j =
+      if j < i
+      then (swap a i r; i)
+      else if a.(i) < x then loop (i+1) j
+      else if a.(j) >= x then loop i (j-1)
+      else (swap a i j; loop (i+1) (j-1))
+    in loop l (r-1) in
+  let rec qsort' l r =
+    if l >= r then ()
+    else let m = partition l r in
+      qsort' l (m-1); qsort' (m+1) r
+  in qsort' 0 (Array.length a - 1)
+;;
+
+let rec insert x l= match l with 
+  |[]-> [x]
+  |y::l-> if x<= y then x::y::l else y:: insert x l
+;;
+                                       
+let rec sort l =match l with
+  |[]->[]
+  |x::l->match l with
+    |[]-> [x]
+    |y::k-> if x<=y then insert x (sort l) else insert x (sort l)
+;;
+
+let rec nth l n =
+  match l with
+  | [] -> failwith "nth"
+  | x :: l -> if n < 1 then x else nth l (n-1)
+;;
+
+let middle x y z = let l = sort (x::y::z::[])
+  in let m_ind = (List.length l) / 2
+  in nth l m_ind
+;;
+                 
+(* Modified/Improved variant *)
+let qsort_i a =
+  let partitionBy l r p =
+    let x = a.(p) in (* x = pivot *)
+    let rec loop i j =
+      if j < i
+      then (swap a i r; i)
+      else if a.(i) < x then loop (i+1) j
+      else if a.(j) >= x then loop i (j-1)
+      else (swap a i j; loop (i+1) (j-1))
+    in loop l (r-1) in
+  let rec qsort' l r =
+    if l >= r then ()
+    else let m = partitionBy l r (middle a.(0) a.((Array.length a) / 2) a.(Array.length a - 1) ) in
+      qsort' l (m-1); qsort' (m+1) r
+  in qsort' 0 (Array.length a - 1)
+;;
+
 
 (*
-invalid_arg "1" + invalid_arg "2";;
+(invalid_arg "1" + invalid_arg "2");;
 (invalid_arg "1", invalid_arg "2");;
 (invalid_arg "1"; invalid_arg "2");;
 (failwith "1" * failwith "2") + failwith "3";;
-failwith "1" * (failwith "2" + failwith "3");;
+(failwith "1" * (failwith "2" + failwith "3"));;
 *)
