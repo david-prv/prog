@@ -83,3 +83,46 @@ let enum =
   let c = Cell.make 0
   in fun () -> let x = Cell.get c in
     Cell.set c (x+1); x 
+
+let enum_squares =
+  let c = Cell.make 0
+  in fun () -> let x = Cell.get c in
+    Cell.set c (x+1); x*x 
+;;
+
+let enum_fib =
+  let c1 = Cell.make 0 in
+  let c2 = Cell.make 1
+  in fun () -> let x = Cell.get c1 in
+    let y = Cell.get c2 in
+    Cell.set c2 x; Cell.set c1 (x+y); Cell.get c1 
+;;
+
+(*let newCounter () = let x = fun () -> enum () in x*)
+(*let newCounter () = let a = enum in let b = ref a in fun () -> b.contents ()*)
+
+let tabulate (n : int) (f : unit -> 'a) =
+  let rec tab' n f a =
+    if n = 0 then a
+    else tab' (n-1) f (a @ [f()])
+  in tab' n f []
+;; 
+
+let rec toList () = 
+  let rec loop i a =
+    if S.empty () then a
+    else begin
+      let topmost = S.top () in
+      let _ = S.pop () in
+      loop (i+1) (a @ [topmost])
+    end
+  in loop 0 []
+;;
+  
+let ofList l =
+  let rec loop l = 
+    match l with
+    | [] -> ()
+    | x::l -> let _ = loop l in S.push x
+  in loop l
+;;
