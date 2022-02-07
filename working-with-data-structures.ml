@@ -33,6 +33,35 @@ module S : BSTACK = struct
   let top () = if empty() then raise Empty else a.(!h -1)
 end
 
+(* Variant of List-based Stack, where max height can be passed as argument of HStack.make *)
+module type HSTACK = sig
+  type 'a stack
+  val make : int -> 'a -> 'a stack
+  val push : 'a stack -> 'a -> unit
+  val pop : 'a stack -> unit
+  val top : 'a stack -> 'a
+  val height : 'a stack -> int
+  val max : 'a stack -> int
+end
+
+module HStack : HSTACK = struct
+  let h = ref 0
+  type 'a stack = 'a list ref
+  exception Empty
+  exception Full
+  let make max x = let _ = h := max in ref [x] 
+  let height s = List.length (!s)
+  let max s = !h 
+  let push s x = if height s = max s then raise Full else s:= x :: !s
+  let pop s = match !s with
+    | [] -> raise Empty
+    | _::l -> s:= l
+  let top s = match !s with
+    | [] -> raise Empty
+    | x::_ -> x 
+end
+
+
 let enum =
   let c = Cell.make 0
   in fun () -> let x = Cell.get c in
