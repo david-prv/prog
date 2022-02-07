@@ -51,10 +51,15 @@ let enum_fib =
   in fun () -> let x = Cell.get c1 in
     let y = Cell.get c2 in
     Cell.set c2 x; Cell.set c1 (x+y); Cell.get c1 
-;;
+;; 
 
-(*let newCounter () = let x = fun () -> enum () in x*)
-(*let newCounter () = let a = enum in let b = ref a in fun () -> b.contents ()*)
+let newCounter () =
+  let enum =
+    let c = Cell.make 0
+    in fun () -> let x = Cell.get c in
+      Cell.set c (x+1); x 
+  in enum
+;; 
 
 let tabulate (n : int) (f : unit -> 'a) =
   let rec tab' n f a =
