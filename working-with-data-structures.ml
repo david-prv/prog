@@ -1,3 +1,32 @@
+type tree = A | B of tree * tree
+
+module type HEAP = sig
+  type address = int
+  type index = int
+  val alloc : int -> address
+  val get : address -> index -> int
+  val set : address -> index -> int -> unit
+  val release : address -> unit
+end 
+
+
+module H : HEAP = struct
+  let maxSize = 1000
+  let h = Array.make maxSize (-1)
+  let s = ref 0 (* current size of heap *)
+  exception Address
+  exception Full
+  type address = int
+  type index = int
+  let alloc n = if n < 1 then raise Address
+    else if !s + n > maxSize then raise Full
+    else let a = !s in s:= !s + n; a
+  let check a = if a < 0 || a >= !s then raise Address else a
+  let get a i = h.(check(a+i))
+  let set a i x = h.(check(a+i)) <-x
+  let release a = s:= check a
+end
+
 module type CELL = sig
   type 'a cell
   val make : 'a -> 'a cell
@@ -61,7 +90,6 @@ module HStack : HSTACK = struct
     | x::_ -> x 
 end
 
-
 let enum =
   let c = Cell.make 0
   in fun () -> let x = Cell.get c in
@@ -116,4 +144,50 @@ let ofList l =
   in loop l
 ;;
   
-  
+let alloc' l =
+  let a = H.alloc (List.length l) in
+  let rec loop l i = match l with
+    | [] -> a
+    | x::l -> H.set a i x; loop l (i+1)
+  in loop l 0
+;;
+
+let rec putlist l = match l with
+  | [] -> -1
+  | x::l -> alloc' [x; putlist l]
+;;
+
+let rec putlist' l a = match l with
+  | [] -> a
+  | x :: l -> putlist' l (alloc' (x::a::[]))
+;;
+
+let rec getlist a =
+  if a = -1 then []
+  else H.get a 0 :: getlist (H.get a 1)
+;;
+
+let rec getlist' a akku =
+  if a = -1 then akku
+  else getlist' (H.get a 1) (H.get a 0 :: akku)
+;;
+
+let alloc_cl n =
+  let fst = ref 0 in
+  let rec loop i a =
+    let _ = if i = 2 then fst := a else fst := !fst in
+    if i > n then let _ = H.set a 1 !fst in a
+    else loop (i+1) (alloc' [i;a])
+  in loop 1 (-1)
+;;
+
+let rec puttree t = match t with
+  | A -> -1
+  | B(t1,t2) -> alloc' [puttree t1; puttree t2]
+;;
+
+let rec gettree a =
+  if a = -1 then A
+  else B(gettree (H.get a 0), gettree (H.get a 1))
+;;
+      
