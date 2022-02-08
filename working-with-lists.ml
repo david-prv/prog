@@ -222,6 +222,11 @@ let ifs x f g =
 let rec fold f l b= match l with
   |[]-> b
   |x::l-> f x (fold f l b)
+                
+let rec foldl f l b =
+  match l with
+  | [] -> b
+  | x :: l -> foldl f l (f x b)
 
 let length l = fold (fun a b-> b +1) l 0
 let sum l= fold (fun a b-> b+a   ) l 0
