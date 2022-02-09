@@ -191,3 +191,13 @@ let rec gettree a =
   else B(gettree (H.get a 0), gettree (H.get a 1))
 ;;
       
+let exponential (b:int) = 
+  let c = ref (1,b) in
+  let n = ref 0 in
+  fun () -> if !n = 0 then let _ = n:= !n + 1 in 1
+    else let _ = n := !n + 1 in let (x,y) = !c in (c:= (x * y, b); x * y)
+;;
+
+let exp b = let c = ref 1 in
+  fun () -> let x = !c in (c := x * b; x)
+;;
