@@ -201,3 +201,7 @@ let exponential (b:int) =
 let exp b = let c = ref 1 in
   fun () -> let x = !c in (c := x * b; x)
 ;;
+
+let tribs = let c = ref (0,1,1) in
+  fun () -> let (a,b,c) = !c in (c := (b,c,a+b+c);a)
+;;
