@@ -119,3 +119,29 @@ let rec exists f l =
   | [] -> false
   | x :: l -> (f x) || exists f l
 ;;
+
+let rec prefixes l =
+  match l with
+  | [] -> [[]]
+  | x :: l -> let t = prefixes l in t @ List.map (List.cons x) t
+;;
+
+let rec suffixes l =
+  match l with
+  | [] -> [[]]
+  | x :: t -> [l] @ suffixes t
+;;
+
+let segments l = flatten (List.map (fun l -> suffixes l) (prefixes l)) [] ;;
+
+let rec fold f l b =
+  match l with
+  | [] -> b
+  | x :: l -> f x (fold f l b)
+;;
+
+let rec foldl f l b =
+  match l with
+  | [] -> b
+  | x :: l -> foldl f l (f x b)
+;;
