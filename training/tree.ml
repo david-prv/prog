@@ -1,4 +1,6 @@
-type tree = A | B of tree * tree
+(* AB Trees *)
+
+type tree = A | B of tree * tree ;; 
                      
 let t1 = B(A,B(A,A)) ;;
 let t2 = B(B(A,A),B(A,A)) ;;
@@ -47,3 +49,28 @@ let rec bal t =
     | Some n1, Some n2 -> if n1 = n2 then Some (n1 + 1) else None
     | _, _ -> None
 ;;
+
+(* ABC Trees *)
+
+type ctree = A | B of ctree * ctree | C of ctree * ctree ;;
+
+let rec prefix t =
+  match t with
+  | A -> "A"
+  | B(t1,t2) -> "B" ^ prefix t1 ^ prefix t2
+  | C(t1,t2) -> "C" ^ prefix t1 ^ prefix t2
+;;
+
+let rec postfix t =
+  match t with
+  | A -> "A"
+  | B(t1,t2) -> postfix t1 ^ postfix t2 ^ "B"
+  | C(t1,t2) -> postfix t1 ^ postfix t2 ^ "C"
+;;
+
+let rec infix t =
+  match t with
+  | A -> "A"
+  | B(t1,t2) -> "(" ^ infix t1 ^ "B" ^ infix t2 ^ ")"
+  | C(t1,t2) -> "(" ^ infix t1 ^ "C" ^ infix t2 ^ ")"
+;; 
