@@ -4,6 +4,8 @@ type tree = A | B of tree * tree ;;
 
 let explode s = List.init (String.length s) (String.get s) ;;
 let implode l = List.fold_right (fun c s -> String.make 1 c ^ s) l "" ;;
+
+implode ['\240'; '\159'; '\152'; '\138'] ;;
     
 (* Lex any AB/ABC-Tree Linearization to Tokenlist *)
 type token = AT | BT | CT | LP | RP ;; 
@@ -28,6 +30,11 @@ let rec prefix t =
   | A -> "A"
   | B(t1, t2) -> "B" ^ prefix t1 ^ prefix t2
 ;;
+let rec prefix_p t = 
+  match t with
+  | A -> "(A)"
+  | B(t1, t2) -> "B(" ^ prefix_p t1 ^ prefix_p t2 ^ ")"
+;;
 
 (* Parse prefix-linearized AB-Trees *)
 let rec prefixl_tree l = match l with
@@ -39,6 +46,18 @@ let rec prefixl_tree l = match l with
   | _ -> failwith "tree"
 ;;
 
+let verify c l = match l with
+  | [] -> failwith "verify: no token"
+  | c'::l -> if c'=c then l else (failwith "verify: wrong token")
+let rec prefixl_tree_p l = match l with
+  | AT::l -> (A,l)
+  | BT::l ->
+      let (t1,l) = prefixl_tree_p l in
+      let (t2,l) = prefixl_tree_p l in
+      (B(t1,t2), l)
+  | LP::l -> let (t,l) = prefixl_tree_p l in (t, verify RP l)
+  | _ -> failwith "tree"
+;;
 (* Infix - Linearization: Fully Parenthesized *)
 let rec infix t =
   match t with
