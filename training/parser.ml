@@ -109,3 +109,21 @@ let juxta_infix' t =
 
 infix' ct ;;
 
+type const = BCON of bool | ICON of int
+type token = LP | RP | EQ | COL | ARR | ADD | SUB | MUL | LEQ
+           | IF | THEN | ELSE | LAM | LET | IN | REC
+           | CON of const | VAR of string | BOOL | INT
+
+let rec ty l : ty * token list = 
+  let (t,l) = pty l in ty' t l
+and ty' t1 l = match l with 
+  | ARR::l ->
+    let (t2,l) = pty l in
+    let (t,l) = ty' t2 l in
+    (Arrow (t1,t),l)
+  | l -> (t1,l)
+and pty l = match l with
+| VAR "bool"::l -> (Bool, l)
+| VAR "int"::l -> (Int, l)
+| LP::l -> let (t,l) = ty l in (t, verify RP l)
+|  _ -> failwith "ty"
