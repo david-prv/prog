@@ -27,3 +27,11 @@ module Dque : DEQUE = struct
   let take_back (d : 'a deque) = let (arr,first,length) = !d in let buff = arr.(pos d (first + length - 1)) in
     (d := (arr,first,length-1);buff)
 end
+
+let rec rev a =
+  let n = Array.length a - 1
+  in let rec loop l r =
+       if r < l then ()
+       else let buff = a.(l) in
+         (a.(l) <- a.(r);a.(r) <- buff;loop (l+1) (r-1))
+  in loop 0 n
