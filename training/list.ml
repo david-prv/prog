@@ -134,14 +134,33 @@ let rec suffixes l =
 
 let segments l = flatten (List.map (fun l -> suffixes l) (prefixes l)) [] ;;
 
-let rec fold f l b =
+let rec foldr f l b =
   match l with
   | [] -> b
-  | x :: l -> f x (fold f l b)
+  | x :: l -> f x (foldr f l b)
 ;;
 
 let rec foldl f l b =
   match l with
   | [] -> b
   | x :: l -> foldl f l (f x b)
+;;
+
+let rev' l = foldl (fun a b -> List.cons a b) l [] ;;
+
+let rec first f b =
+  if f b then b else first f (b+1)
+;;
+
+let prime_test x =
+  if x < 2 then false
+  else let k = first (fun k -> (x mod k = 0)) 2
+    in k = x
+;;
+
+let rec mem x l =
+  match l with
+  | [] -> false
+  | y :: l when y = x -> true
+  | y :: l -> mem x l
 ;;
