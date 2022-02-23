@@ -25,7 +25,6 @@ let rec msort l =
   | x :: y :: l -> let (l1,l2) = split l [x] [y] in merge (msort l1) (msort l2)
 ;;
 
-
 (* Generalized Insertion Sort : O(n) *)
 
 let rec insert x p l = 
