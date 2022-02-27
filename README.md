@@ -1,4 +1,5 @@
-# OCaml Lecture Notes
+# Prog1 - OCaml Lecture Notes
+## Repo is no longer actively used
 
 Working with OCaml  
 This repository was made during lectures
