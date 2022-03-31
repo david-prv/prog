@@ -1,9 +1,8 @@
-# Prog1 - OCaml Lecture Notes
-## Repo is no longer actively used
-
+# Prog - OCaml Lecture Notes
 Working with OCaml  
-This repository was made during lectures
+This repository was started and is maintained during lectures
 ## Table of contents
+### Programming 1
 1. [Working with iteration](https://github.com/david-prv/ocaml/blob/main/working-with-iteration.ml): first, iter, fst, successor, predecessor, quantors, eveness, primes, fibonacci, ...
 2. [Working with lists](https://github.com/david-prv/ocaml/blob/main/working-with-lists.ml): converting to decimal numbers and vice versa, hashmaps, optional types, flatten, filter, zip, folding, insertion sorting, generalized matching, list operations, ...
 3. [Working with trees](https://github.com/david-prv/ocaml/blob/main/working-with-trees.ml): implementation of data type ``tree``, depth, breadth, tree generation, balanced trees, traversal types (infix, postfix, prefix), abstract expressions (grammar), algorithmic checking for free variables in abstract expressions...
@@ -11,6 +10,8 @@ This repository was made during lectures
 5. [Working with running times](https://github.com/david-prv/ocaml/blob/main/working-with-running-times.ml): Experimenting with running times, Big-O, recursive defined running time (= r(n) ), ... 
 6. [Working with arrays](https://github.com/david-prv/ocaml/blob/main/working-with-arrays.ml): array structures, sequences, new modern algos, mutable variable types, ...
 7. [Working with data structures](https://github.com/david-prv/ocaml/blob/main/working-with-data-structures.ml): module types, signatures, modules, enumerations, cells, ...
+### Programming 2
+-/-
 
 ## Mini OCaml
 Interpreter, Parser and Lexer for OCaml Sublanguage "Mini OCaml"  
