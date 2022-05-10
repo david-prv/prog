@@ -18,6 +18,11 @@ This repository was started and is maintained during lectures
 Interpreter, Parser and Lexer for OCaml Sublanguage "Mini OCaml"  
 [check it out](https://github.com/david-prv/mini-ocaml)
 
+### MIPS - 2048
+A 2048 implementation, written in MIPS Assembly.
+We only had to develop subroutines.  
+[check it out](#)
+
 ## Further reading
 - Programming Systems Lab - University of Saarland ([Git](https://github.com/uds-psl))
 - Wikipedia ([article](https://de.wikipedia.org/wiki/Objective_CAML))
