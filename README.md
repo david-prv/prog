@@ -11,7 +11,7 @@ This repository was started and is maintained during lectures
 6. [OCaml: Working with arrays](https://github.com/david-prv/ocaml/blob/main/prog1/working-with-arrays.ml): array structures, sequences, new modern algos, mutable variable types, ...
 7. [OCaml: Working with data structures](https://github.com/david-prv/ocaml/blob/main/prog1/working-with-data-structures.ml): module types, signatures, modules, enumerations, cells, ...
 ### Programming 2
--/-
+1. [2048](https://github.com/david-prv/prog/tree/main/prog2/2048): MIPS ASM based 2048 implementation
 
 ## Projects
 ### Mini OCaml Interpreter
@@ -21,7 +21,7 @@ Interpreter, Parser and Lexer for OCaml Sublanguage "Mini OCaml"
 ### MIPS - 2048
 A 2048 implementation, written in MIPS Assembly.
 We only had to develop subroutines.  
-[check it out](#)
+[check it out](https://github.com/david-prv/prog/tree/main/prog2/2048)
 
 ## Further reading
 - Programming Systems Lab - University of Saarland ([Git](https://github.com/uds-psl))
