@@ -12,6 +12,7 @@ This repository was started and is maintained during lectures
 7. [OCaml: Working with data structures](https://github.com/david-prv/ocaml/blob/main/prog1/working-with-data-structures.ml): module types, signatures, modules, enumerations, cells, ...
 ### Programming 2
 1. [Project: MIPS 2048](https://github.com/david-prv/prog/tree/main/prog2/2048): MIPS ASM based 2048 implementation
+2. [MIPS: Testing ASM Words](https://github.com/david-prv/prog/tree/main/prog2/testing-asm-words.asm): I played around with data segment words and syscalls ...
 
 ## Projects
 ### Mini OCaml Interpreter
