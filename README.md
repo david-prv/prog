@@ -26,7 +26,7 @@ We only had to develop subroutines.
 
 ### C - Steamcarving
 A Steamcarving Algorithm Implementation, written in C.
-Again, we only had to implement some functionalities, not the whole thing.
+Again, we only had to implement some functionalities, not the whole thing.  
 [check it out](#)
 
 ## Further reading
