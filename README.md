@@ -15,7 +15,7 @@ This repository was started and is maintained during lectures
 2. [MIPS: Testing ASM Words](https://github.com/david-prv/prog/tree/main/prog2/testing-asm-words.asm): I played around with data segment words and syscalls ...
 
 ## Projects
-### Mini OCaml Interpreter
+### OCaml - Mini OCaml Interpreter
 Interpreter, Parser and Lexer for OCaml Sublanguage "Mini OCaml"  
 [check it out](https://github.com/david-prv/mini-ocaml)
 
