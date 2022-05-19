@@ -1,5 +1,5 @@
 # Prog - Lecture Notes
-Working with OCaml and others...  
+Working with OCaml, Assembler, C and others...  
 This repository was started and is maintained during lectures
 ## Table of contents
 ### Programming 1
