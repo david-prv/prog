@@ -25,8 +25,8 @@ A 2048 implementation, written in MIPS Assembly.
 We only had to develop subroutines.  
 [check it out](https://github.com/david-prv/prog/tree/main/prog2/2048)
 
-### C - Steamcarving
-A Steamcarving Algorithm Implementation, written in C.
+### C - Seamcarving
+A Seamcarving Algorithm Implementation, written in C.
 Again, we only had to implement some functionalities, not the whole thing.  
 [check it out](https://github.com/david-prv/prog/tree/main/prog2/steamcarving)
 
