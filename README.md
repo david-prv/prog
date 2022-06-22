@@ -11,8 +11,8 @@ This repository was started and is maintained during lectures
 6. [OCaml: Working with arrays](https://github.com/david-prv/ocaml/blob/main/prog1/working-with-arrays.ml): array structures, sequences, new modern algos, mutable variable types, ...
 7. [OCaml: Working with data structures](https://github.com/david-prv/ocaml/blob/main/prog1/working-with-data-structures.ml): module types, signatures, modules, enumerations, cells, ...
 ### Programming 2
-1. [Project: MIPS 2048](https://github.com/david-prv/prog/tree/main/prog2/2048): MIPS ASM based 2048 implementation
-2. [Project: C Seamcarving](https://github.com/david-prv/prog/tree/main/prog2/seamcarving): C based Steamcarving implementation
+1. [MIPS: 2048](https://github.com/david-prv/prog/tree/main/prog2/2048): MIPS ASM based 2048 implementation
+2. [C: Seamcarving](https://github.com/david-prv/prog/tree/main/prog2/seamcarving): C based Steamcarving implementation
 3. [MIPS: Testing ASM Words](https://github.com/david-prv/prog/tree/main/prog2/testing-asm-words.asm): I played around with data segment words and syscalls ...
 4. [Java: URI Parser](#): Simple parser for a simplified URI grammer
 5. [Java: Tetris](#): Idk what to say about Tetris... It's Tetris lol
