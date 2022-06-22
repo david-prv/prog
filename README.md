@@ -34,7 +34,7 @@ Again, we only had to implement some functionalities, not the whole thing.
 
 ### Java - URI Parser
 Simple parser for a simplified URI grammer in Java.
-This time, we had to implement Unit Tests AND the Parser itself (almost without any given snippets).
+This time, we had to implement Unit Tests AND the Parser itself (almost without any given snippets).  
 [check it out](#)
 
 ### Java - Tetris
