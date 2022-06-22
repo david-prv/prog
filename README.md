@@ -14,6 +14,8 @@ This repository was started and is maintained during lectures
 1. [Project: MIPS 2048](https://github.com/david-prv/prog/tree/main/prog2/2048): MIPS ASM based 2048 implementation
 2. [Project: C Seamcarving](https://github.com/david-prv/prog/tree/main/prog2/seamcarving): C based Steamcarving implementation
 3. [MIPS: Testing ASM Words](https://github.com/david-prv/prog/tree/main/prog2/testing-asm-words.asm): I played around with data segment words and syscalls ...
+4. [Java: URI Parser](#): Simple parser for a simplified URI grammer
+5. [Java: Tetris](#): Idk what to say about Tetris... It's Tetris lol
 
 ## Projects
 ### OCaml - Mini OCaml Interpreter
@@ -29,6 +31,14 @@ We only had to develop subroutines.
 A Seamcarving Algorithm Implementation, written in C.
 Again, we only had to implement some functionalities, not the whole thing.  
 [check it out](https://github.com/david-prv/prog/tree/main/prog2/steamcarving)
+
+### Java - URI Parser
+Simple parser for a simplified URI grammer in Java.
+This time, we had to implement Unit Tests AND the Parser itself (almost without any given snippets).
+[check it out](#)
+
+### Java - Tetris
+*work in progress*
 
 ## Further reading
 - Programming Systems Lab - University of Saarland ([Git](https://github.com/uds-psl))
