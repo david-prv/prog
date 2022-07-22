@@ -21,7 +21,7 @@ complete_move:
 	
 		
 		# Prologue
-		addiu	$sp $sp -8 # we want to save return-addr
+		addiu	$sp $sp -8
 		sw	$v0 4($sp)
 		sw	$v1 ($sp)
 	
@@ -42,7 +42,7 @@ complete_move:
 	# ... merge returns here
 	
 		# Prologue
-		addiu	$sp $sp -8 # we want to save return-addr
+		addiu	$sp $sp -8
 		sw	$v0 4($sp)
 		sw	$v1 ($sp)
 	
