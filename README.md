@@ -1,6 +1,13 @@
 # Prog - Lecture Notes
 Working with OCaml, Assembler, C and others...  
 This repository was started and is maintained during lectures
+
+## ⚠️ Abandoned ⚠️
+This repository is abandoned! Missing projects will not be supplemented and existing ones will not be fixed/updated. Repositories, that might interest you instead:
+- [Simp by @edd255](https://github.com/edd255/simp)
+- [Mocaml by @edd255](https://github.com/edd255/mocaml)
+- [miniOCaml-interpreter by @JoeJoeTV](https://github.com/JoeJoeTV/miniOCaml-interpreter)
+
 ## Table of contents
 ### Programming 1
 1. [OCaml: Working with iteration](https://github.com/david-prv/ocaml/blob/main/prog1/working-with-iteration.ml): first, iter, fst, successor, predecessor, quantors, eveness, primes, fibonacci, ...
