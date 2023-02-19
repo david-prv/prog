@@ -6,7 +6,13 @@ This repository was started and is maintained during lectures
 This repository is abandoned! Missing projects will not be supplemented and existing ones will not be fixed/updated. Repositories, that might interest you instead:
 - [Simp by @edd255](https://github.com/edd255/simp)
 - [Mocaml by @edd255](https://github.com/edd255/mocaml)
-- [miniOCaml-interpreter by @JoeJoeTV](https://github.com/JoeJoeTV/miniOCaml-interpreter)
+- [miniOCaml-interpreter by @JoeJoeTV](https://github.com/JoeJoeTV/miniOCaml-interpreter)  
+
+Work that might interest you, including mine:
+
+- [Olive.c by @tsoding](https://github.com/tsoding/olive.c)
+- [QuickyPHP by @david-prv](https://github.com/david-prv/quickyphp)
+- [Pixle by @KoolerNolan](https://github.com/KoolerNolan/pixle)
 
 ## Table of contents
 ### Programming 1
