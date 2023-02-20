@@ -8,7 +8,7 @@ This repository is abandoned! Missing projects will not be supplemented and exis
 - [Mocaml by @edd255](https://github.com/edd255/mocaml)
 - [miniOCaml-interpreter by @JoeJoeTV](https://github.com/JoeJoeTV/miniOCaml-interpreter)  
 
-Work that might interest you, including mine:
+Other work that might interest you, including mine:
 
 - [Olive.c by @tsoding](https://github.com/tsoding/olive.c)
 - [QuickyPHP by @david-prv](https://github.com/david-prv/quickyphp)
